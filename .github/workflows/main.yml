@@ -1,20 +1,25 @@
+name: auto-sync
 on:
   push:
     branches:
-    - origin/main
+      - origin/main
+  workflow_dispatch:
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout files
-      #   uses: actions/checkout@v2
-      #   with:
-      #     repository: octocat/dst-repsotiory
-      #     token: ${{ secrets.octocat_token }}
+      - name: Checkout files
+        uses: actions/checkout@v2
+        with:
+          repository: BlakeTnr/VIVSMPCoreProtect
+          token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
       - name: Sync files with dst-octocat-repsotiory!
         uses: denis-tingajkin/sync-files@main
         with:
           git-author-email: 'octocat@github.com'
           git-author-name: 'Octocat'
-          src-repository: octocat/src-repsotiory
+          branch-name: 'master'
+          sync-repository: PlayPro/CoreProtect
+          
+          result-branch-name: ${{inputs.sync_repository}}

@@ -28,6 +28,8 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Build
         run: mvn -B verify
+      - name: list
+        run: ls
       - name: Release
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
@@ -36,5 +38,4 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            LICENSE.txt
             *.jar
